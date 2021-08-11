@@ -1,10 +1,10 @@
-var CACHE_NAME = "pwa -news";
-var urlsToCache = ["/", "index.html"];
+var CACHE_NAME = "pwa-news";
+var urlsToCache = ["/", "/index.html"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
-      console.log(cache);
+      console.log("Opened");
       return cache.addAll(urlsToCache);
     })
   );
@@ -27,7 +27,6 @@ self.addEventListener("active", (event) => {
 
 self.addEventListener("fetch", (event) => {
   console.log("fetch", event);
-
   event.respondWith(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.match(event.request).then((response) => {
