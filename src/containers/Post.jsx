@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState, useCallback } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { Row, Col } from "antd";
 import Api from "../api";
-//import Action from "./components/Actions";
+import Action from "./components/Actions";
 import { createMarkup } from "../utils";
 import "./styles.css";
 
@@ -59,6 +59,8 @@ const Post = () => {
     <div>Loading</div>
   ) : (
     <div>
+      <Link to={"/"}> Back </Link>
+      <Action post={post} subject={subject} />
       <Row gutter={[16, 16]}>
         <Col span={24} md={16}>
           <p>{datePublished}</p>
@@ -69,6 +71,7 @@ const Post = () => {
             dangerouslySetInnerHTML={createMarkup(description)}
           />
           <hr />
+          <p className="text" dangerouslySetInnerHTML={createMarkup(body)} />
         </Col>
         <Col span={24} md={16}>
           <Row gutter={[16, 16]}>{news?.value?.map(renderPost)}</Row>
